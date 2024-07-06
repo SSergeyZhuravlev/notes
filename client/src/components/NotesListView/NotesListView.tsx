@@ -1,16 +1,21 @@
 import "./NotesListView.css";
 import { NoteView } from "../NoteView";
-import { useFetchNoteList } from "../../api/useFetchNoteList";
+import { NoteList } from "../../api/useFetchNoteList";
+import { FC } from "react";
 
-export const NotesListView = () => {
-  const notes = useFetchNoteList();
-  console.log(notes.state);
+interface INotesListViewProps {
+  noteList: NoteList
+}
 
-  return (
+export const NotesListView: FC<INotesListViewProps> = ( { noteList } ) => {
+
+  return noteList ? (
     <ul className="note-list-view">
-      <li>
-        <NoteView />
-      </li>
+      { noteList.map((note) => (
+        <li key={note.id}> 
+          <NoteView note={note} />
+        </li>
+      )) }
     </ul>
-  );
+  ) : <div className="note-list-view ">Список заметок пуст</div>;
 };

@@ -23,20 +23,20 @@ export const FetchNoteListSchema = z.object({
 export type FetchNoteList = z.infer<typeof FetchNoteListSchema>;
 
 type IdleResponseStatus = {
-    status: string,
+    status: 'idle',
 }
 
 type PendingResponseStatus = {
-    status: string,
+    status: 'pending',
 }
 
 type SuccessResponseStatus = {
-    status: string,
+    status: 'success',
     data: NoteList
 }
 
 type ErrorResponseStatus = {
-    status: string,
+    status: 'error',
     error: unknown, 
 }
 
@@ -48,10 +48,10 @@ export function useFetchNoteList() {
     useEffect(() => {
         if (state.status === 'pending') {
             fetchNoteList()
-            .then(data => {
+            .then((data) => {
                 setState({status: 'success', data: data.list})
             })
-            .catch(error => {
+            .catch((error) => {
                 setState({status: 'error', error: error})
             })
         }

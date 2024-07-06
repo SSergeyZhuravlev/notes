@@ -5,7 +5,8 @@ import { Loader } from "../Loader";
 import { AuthForm } from "../AuthForm";
 import { LogoutButton } from "../LogoutButton";
 import { UserView } from "../UserView";
-import { NotesListView } from "../NotesListView";
+import { FetchNoteListView } from "../NotesListView/FetchNoteListView";
+import './Account.css';
 
 export const Account = () => {
     const accountQuery = useQuery({
@@ -29,9 +30,11 @@ export const Account = () => {
         case 'success':
             return (
                 <>
-                    <NotesListView />
-                    <UserView username={accountQuery.data.username} />
-                    <LogoutButton />
+                    <div className="account-header">
+                        <UserView username={accountQuery.data.username} />
+                        <LogoutButton />
+                    </div>
+                    <FetchNoteListView />
                 </>
             );
     }
