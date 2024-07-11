@@ -12,6 +12,7 @@ export const LoginForm = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<LoginUser>({
     resolver: zodResolver(loginUserSchema),
@@ -22,14 +23,16 @@ export const LoginForm = () => {
 
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: ['users', 'me'] })
-    }
+    },
+
+    onError() { reset() },
   },
   queryClient,
 );
 
   return (
     <form className="login-form" onSubmit={handleSubmit(( { email, password } ) => {
-      loginMutation.mutate({email, password})
+      loginMutation.mutate({ email, password })
     })}>
       <FormField label="Email" errorMessage={errors.email?.message}>
         <input {...register('email')} />

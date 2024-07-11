@@ -12,6 +12,7 @@ export const RegisterForm = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<CreateUser>({
     resolver: zodResolver(createUserSchema)
@@ -23,9 +24,11 @@ export const RegisterForm = () => {
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: ['users', 'me'] })
     },
+
+    onError() { reset() },
   },
-  queryClient,
-);
+    queryClient,
+  );
 
   return (
     <form className="register-form" onSubmit={handleSubmit(( { username, email, password } ) => {

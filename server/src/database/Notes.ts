@@ -27,7 +27,7 @@ export class Notes {
     userId: string,
     { page, pageSize, searchString }: IGetAllNotesOptions = {},
   ): IGetAllNotesResult {
-    let list = Object.values(database.data);
+    let list = Object.values(database.data).filter(obj => obj.userId === userId);
     let pageCount = 1;
 
     if (searchString) {

@@ -17,6 +17,11 @@
   font-size: 12px;
 }
 
+.form-field > textarea {
+  height: auto;
+  min-height: 100px;
+}
+
 .form-field > input,
 .form-field > textarea {
   border-radius: 8px;

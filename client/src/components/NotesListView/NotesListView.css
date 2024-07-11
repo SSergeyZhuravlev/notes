@@ -1,11 +1,13 @@
-.note-list-view {
+.note-list-view,
+.note-list-view__loader {
   margin: 0;
   list-style: none;
   display: flex;
   flex-direction: column;
   gap: 8px;
   height: 100%;
-
+  max-height: 95vh;
+  width: 50%;
   margin-inline: auto;
   overflow: auto;
   padding: 16px;
@@ -13,4 +15,9 @@
   box-sizing: border-box;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
+}
+
+.note-list-view__loader {
+  justify-content: center;
+  align-items: center;
 }

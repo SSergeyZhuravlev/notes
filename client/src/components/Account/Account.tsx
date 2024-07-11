@@ -3,10 +3,7 @@ import { fetchMe } from "../../api/User"
 import { queryClient } from "../../api/queryClient"
 import { Loader } from "../Loader";
 import { AuthForm } from "../AuthForm";
-import { LogoutButton } from "../LogoutButton";
-import { UserView } from "../UserView";
-import { FetchNoteListView } from "../NotesListView/FetchNoteListView";
-import './Account.css';
+import { AccountLayout } from "./AccountLayout";
 
 export const Account = () => {
     const accountQuery = useQuery({
@@ -28,14 +25,6 @@ export const Account = () => {
             return <AuthForm />;
 
         case 'success':
-            return (
-                <>
-                    <div className="account-header">
-                        <UserView username={accountQuery.data.username} />
-                        <LogoutButton />
-                    </div>
-                    <FetchNoteListView />
-                </>
-            );
+            return <AccountLayout username={accountQuery.data.username} id={accountQuery.data.id} />
     }
 }
